@@ -12,10 +12,10 @@ if (!empty($data->category)) {
             'category' => $category->category,
         ]);
     } else {
-        http_response_code(500);
+        http_response_code(200);
         echo json_encode(['message' => 'Category Not Created']);
     }
 } else {
-    http_response_code(400);
+    http_response_code(200);
     echo json_encode(['message' => 'Missing Required Parameters']);
 }

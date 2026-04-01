@@ -1,9 +1,7 @@
 <?php
-// PUT /api/quotes/?id=X — update a quote
-// Body: { "quote": "...", "author_id": 1, "category_id": 2 }
+// PUT /api/quotes/ — update a quote
 $data = json_decode(file_get_contents('php://input'));
 
-// Accept id from query string or body
 $id = isset($_GET['id']) ? $_GET['id'] : (isset($data->id) ? $data->id : null);
 
 if (!empty($id) && !empty($data->quote) && !empty($data->author_id) && !empty($data->category_id)) {
@@ -12,7 +10,7 @@ if (!empty($id) && !empty($data->quote) && !empty($data->author_id) && !empty($d
     $authorCheck     = new Author($db);
     $authorCheck->id = $data->author_id;
     if (!$authorCheck->read_single()) {
-        http_response_code(404);
+        http_response_code(200);
         echo json_encode(['message' => 'author_id Not Found']);
         exit;
     }
@@ -22,7 +20,7 @@ if (!empty($id) && !empty($data->quote) && !empty($data->author_id) && !empty($d
     $categoryCheck     = new Category($db);
     $categoryCheck->id = $data->category_id;
     if (!$categoryCheck->read_single()) {
-        http_response_code(404);
+        http_response_code(200);
         echo json_encode(['message' => 'category_id Not Found']);
         exit;
     }
@@ -41,13 +39,10 @@ if (!empty($id) && !empty($data->quote) && !empty($data->author_id) && !empty($d
             'category_id' => $quote->category_id,
         ]);
     } else {
-        http_response_code(404);
+        http_response_code(200);
         echo json_encode(['message' => 'No Quotes Found']);
     }
-} elseif (!empty($id) && (empty($data->quote) || empty($data->author_id) || empty($data->category_id))) {
-    http_response_code(400);
-    echo json_encode(['message' => 'Missing Required Parameters']);
 } else {
-    http_response_code(400);
+    http_response_code(200);
     echo json_encode(['message' => 'Missing Required Parameters']);
 }

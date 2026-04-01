@@ -12,11 +12,10 @@ if (!empty($data->author)) {
             'author' => $author->author,
         ]);
     } else {
-        http_response_code(500);
+        http_response_code(200);
         echo json_encode(['message' => 'Author Not Created']);
     }
 } else {
-    http_response_code(400);
+    http_response_code(200);
     echo json_encode(['message' => 'Missing Required Parameters']);
 }
-

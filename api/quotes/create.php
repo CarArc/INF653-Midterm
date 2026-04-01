@@ -1,6 +1,5 @@
 <?php
 // POST /api/quotes/ — create a new quote
-// Body: { "quote": "...", "author_id": 1, "category_id": 2 }
 $data = json_decode(file_get_contents('php://input'));
 
 if (!empty($data->quote) && !empty($data->author_id) && !empty($data->category_id)) {
@@ -9,7 +8,7 @@ if (!empty($data->quote) && !empty($data->author_id) && !empty($data->category_i
     $authorCheck     = new Author($db);
     $authorCheck->id = $data->author_id;
     if (!$authorCheck->read_single()) {
-        http_response_code(404);
+        http_response_code(200);
         echo json_encode(['message' => 'author_id Not Found']);
         exit;
     }
@@ -19,7 +18,7 @@ if (!empty($data->quote) && !empty($data->author_id) && !empty($data->category_i
     $categoryCheck     = new Category($db);
     $categoryCheck->id = $data->category_id;
     if (!$categoryCheck->read_single()) {
-        http_response_code(404);
+        http_response_code(200);
         echo json_encode(['message' => 'category_id Not Found']);
         exit;
     }
@@ -37,10 +36,10 @@ if (!empty($data->quote) && !empty($data->author_id) && !empty($data->category_i
             'category_id' => $quote->category_id,
         ]);
     } else {
-        http_response_code(500);
+        http_response_code(200);
         echo json_encode(['message' => 'Quote Not Created']);
     }
 } else {
-    http_response_code(400);
+    http_response_code(200);
     echo json_encode(['message' => 'Missing Required Parameters']);
 }

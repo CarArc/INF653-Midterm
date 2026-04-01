@@ -8,6 +8,6 @@ if ($category->read_single()) {
     http_response_code(200);
     echo json_encode($category_arr);
 } else {
-    http_response_code(404);
-    echo json_encode(['message' => 'Category Not Found']);
+    http_response_code(200);
+    echo json_encode(['message' => 'category_id Not Found']);
 }

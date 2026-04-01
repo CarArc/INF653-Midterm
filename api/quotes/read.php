@@ -6,17 +6,15 @@ if (count($results) > 0) {
     $quotes_arr = [];
     foreach ($results as $row) {
         $quotes_arr[] = [
-            'id'          => $row['id'],
-            'quote'       => $row['quote'],
-            'author_id'   => $row['author_id'],
-            'category_id' => $row['category_id'],
-            'author'      => $row['author'],
-            'category'    => $row['category'],
+            'id'       => $row['id'],
+            'quote'    => $row['quote'],
+            'author'   => $row['author'],
+            'category' => $row['category'],
         ];
     }
     http_response_code(200);
     echo json_encode($quotes_arr);
 } else {
-    http_response_code(404);
+    http_response_code(200);
     echo json_encode(['message' => 'No Quotes Found']);
 }

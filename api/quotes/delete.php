@@ -1,28 +1,26 @@
 <?php
-// DELETE /api/quotes/?id=X — delete a quote
+// DELETE /api/quotes/ — delete a quote
 $data = json_decode(file_get_contents('php://input'));
 
-// Accept id from query string or body
 $id = isset($_GET['id']) ? $_GET['id'] : (isset($data->id) ? $data->id : null);
 
 if (!empty($id)) {
     $quote->id = $id;
 
-    // Check the quote exists first
     if (!$quote->read_single()) {
-        http_response_code(404);
+        http_response_code(200);
         echo json_encode(['message' => 'No Quotes Found']);
         exit;
     }
 
     if ($quote->delete()) {
         http_response_code(200);
-        echo json_encode(['id' => $id]);   // spec requires returning the id
+        echo json_encode(['id' => $id]);
     } else {
-        http_response_code(500);
+        http_response_code(200);
         echo json_encode(['message' => 'Quote Not Deleted']);
     }
 } else {
-    http_response_code(400);
+    http_response_code(200);
     echo json_encode(['message' => 'Missing Required Parameters']);
 }
