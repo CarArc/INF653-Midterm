@@ -1,6 +1,6 @@
 # INF653 Quotes API — Midterm Project
 
-**Student:** [Your Name Here]  
+**Student:** Amir Deilami  
 **Course:** INF653 — Back End Web Development, Spring 2026
 
 ---
