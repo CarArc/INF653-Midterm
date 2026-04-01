@@ -11,7 +11,7 @@ A PHP OOP REST API for famous and user-submitted quotations. Built with PHP 8.2,
 
 ## 🚀 Live Project
 
-**API Base URL:** [Add your Render.com URL here after deployment]
+**API Base URL:** https://inf653-midterm-ff8m.onrender.com
 
 **Endpoints:**
 - `GET /api/quotes/` — All quotes
