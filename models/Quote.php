@@ -103,7 +103,10 @@ class Quote {
 
         try {
             if ($stmt->execute()) {
-                return true;
+                if ($stmt->rowCount() > 0) {
+                    return true;
+                }
+                return false;
             }
         } catch (PDOException $e) {
             return false;
