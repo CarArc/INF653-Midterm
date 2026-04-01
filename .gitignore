@@ -1,0 +1,20 @@
+# Environment files — NEVER commit secrets to GitHub
+.env
+.htaccess
+
+# Local notes and course materials — NOT for GitHub
+REQUIREMENTS.md
+Instructions.txt
+*.txt
+*.pdf
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories
+.vscode/
+.idea/
+
+# Docker volumes
+postgres_data/

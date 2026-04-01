@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=quotesdb
+      - DB_USER=postgres
+      - DB_PASS=password
+      - DB_PORT=5432
+    depends_on:
+      - db
+    volumes:
+      - .:/var/www/html
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=quotesdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+
+volumes:
+  postgres_data:
